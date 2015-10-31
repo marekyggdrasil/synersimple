@@ -2,7 +2,7 @@
 /* dependencies */
 
 var robot = require('robotjs'); 
-var conf = require('./masterconf.json');
+var conf = require('./conf.json');
 var socket = require('socket.io-client')('http://'+conf.address+':'+conf.port);
 
 /* connect / disconnect events */
