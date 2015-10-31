@@ -1,0 +1,25 @@
+{
+	"hostname" : "",
+	"address" : "",
+	"port" : 3000,
+	"mouse" : "",
+	"keyboard" : "",
+	"xinput" : 0,
+	"resx" : 0,
+	"resy" : 0,
+	"network" :
+		{
+			"left" :
+				{
+					"hostname" : "",
+					"resx" : 0,
+					"resy" : 0
+				},
+			"right" :
+				{
+					"hostname" : "",
+					"resx" : 0,
+					"resy" : 0
+				}
+		}
+}

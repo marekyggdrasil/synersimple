@@ -1,0 +1,17 @@
+{
+	"name": "synersimple",
+	"version": "0.0.1",
+	"description": "simple alternative to synergy project",
+	"repository": {
+		"type" : "git",
+		"url" : "https://github.com/marekyggdrasil/synersimple.git"
+	},
+	"dependencies": {
+		"socket.io": "1.0.2",
+		"robotjs": "0.3.2",
+		"express": "4.3.1",
+		"xinput": "0.5.0",
+		"socket.io": "1.0.2",
+		"socket.io-client": "1.3.7"
+	}
+}
