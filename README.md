@@ -64,7 +64,9 @@ You should name devices with distinct strings for identification purposes.
 
 Once you finish your *conf.json* simply copy it to all machines that will act as separate screens. 
 
-7. example *conf.json* file.
+7. On each computer replace root hostname by its own hostname, so that each side screen computer will know as which machine it should log in to server.
+
+8. example *conf.json* file.
 
 Following configuration file represents case of three computers, a desktop that controls two laptops as side screens, machine names as *laptop1* is placed on left side and *laptop2* is placed on right side of desktop screen. Both laptops have resolution of screen 1024x768 while desktop screen is 1280x800.
 
