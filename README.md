@@ -10,11 +10,11 @@ This software does not implement any kind of encryption (for now). Socket events
 
 Basic requirement is *Node.js* and *npm*, if you don't have those programs start by installing them.
 
-1. install dependencies
+## install dependencies
 
 `npm install`
 
-2. install `input-event` dependency
+## install `input-event` dependency
 
 Library `input-event` does not figure in npm repository, thus it has to be installed manually. Simply download the zip package from [input-event repository](https://github.com/risacher/input-event) , unzip it to `node_modules` directory and rename it from `input-event-master` to `input-event`.
 
