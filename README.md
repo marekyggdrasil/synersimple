@@ -22,13 +22,13 @@ Library `input-event` does not figure in npm repository, thus it has to be insta
 
 Configuration is done in single *conf.json* file. Here we provide an example configuration for single desktop and two laptop computers.
 
-1. check server local ip address
+## check server local ip address
 
 `ifconfig`
 
 It figures under *inet addr*. You also need to choose port, most common choice seems to be 3000, although you can choose anything you prefer that is available.
 
-2. check input devices
+## check input devices
 
 You can simply list available input devices using
 
@@ -44,11 +44,11 @@ Or else
 
 If you still don't know which input corresponds to your keyboard and mouse, you can try different options.
 
-3. check screen resolutions
+## check screen resolutions
 
 You need to provide screen resolutions for server computer, as well as for side screen computers.
 
-4. define xinput device for your mouse
+## define xinput device for your mouse
 
 To list available xinput devices use
 
@@ -56,17 +56,17 @@ To list available xinput devices use
 
 Take the id value of the one that corresponds to your mouse. Without it server will not be able to disable mouse when pointer moves to another screen.
 
-5. choose hostnames
+## choose hostnames
 
 You should name devices with distinct strings for identification purposes.
 
-6. distribute *conf.json* among your computers.
+## distribute *conf.json* among your computers.
 
 Once you finish your *conf.json* simply copy it to all machines that will act as separate screens. 
 
-7. On each computer replace root hostname by its own hostname, so that each side screen computer will know as which machine it should log in to server.
+On each computer replace root hostname by its own hostname, so that each side screen computer will know as which machine it should log in to server.
 
-8. example *conf.json* file.
+## example *conf.json* file.
 
 Following configuration file represents case of three computers, a desktop that controls two laptops as side screens, machine names as *laptop1* is placed on left side and *laptop2* is placed on right side of desktop screen. Both laptops have resolution of screen 1024x768 while desktop screen is 1280x800.
 
