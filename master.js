@@ -10,6 +10,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var inputevent = require('input-event');
 var xinput = require('xinput');
+var copypaste = require('copy-paste');
 
 /* pointer position variables */
 
@@ -21,6 +22,15 @@ var diff_pos = {x: 0, y: 0};
 var slave_left = undefined;
 var slave_right = undefined;
 var control = undefined;
+
+/* clipboard variables */
+
+var clipboard = undefined;
+copypaste.paste(function(err, text) {
+	if(!err) {
+		clipboard = text;
+	}
+});
 
 /* hardware */
 
@@ -155,6 +165,27 @@ setInterval(function() {
 	diff_pos = {x: 0, y: 0};
 }, 10);
 
+/* detect clipboard change */
+
+setInterval(function() {
+	copypaste.paste(function(err, text) {
+		if( !err ) {
+		if( control == undefined ) {
+		if( clipboard != text ) {
+			clipboard = text;
+			if( slave_left != undefined ) {
+				slave_left.emit('copy', text);
+			}
+			if( slave_right != undefined ) {
+				slave_right.emit('copy', text);
+			}
+		}
+		}
+		}
+	});
+}, 10);
+
+
 /* socket communication events */
 
 io.on('connection', function(socket) {
@@ -178,6 +209,17 @@ io.on('connection', function(socket) {
 	socket.on('return', function() {
 		setMouseEnabled(true);
 		control = undefined;
+	});
+	/* copy event */
+	socket.on('copy', function(text) {
+		copypaste.copy(text);
+		/* distribute to remaining computers */
+ 		if( slave_left != socket && slave_left != undefined ) {
+			slave_left.emit('copy', text);
+		}
+		if( slave_right != socket && slave_right != undefined ) {
+			slave_right.emit('copy', text);
+		}
 	});
 });
 

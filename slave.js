@@ -4,6 +4,7 @@
 var robot = require('robotjs'); 
 var conf = require('./conf.json');
 var socket = require('socket.io-client')('http://'+conf.address+':'+conf.port);
+var copypaste = require('copy-paste');
 
 /* connect / disconnect events */
 
@@ -13,6 +14,29 @@ socket.on('connected', function() {
 socket.on('disconnect', function() {
 	console.log('. disconnected from server');
 });
+
+/* clipboard variables */
+
+var clipboard = undefined;
+copypaste.paste(function(err, text) {
+	if(!err) {
+		clipboard = text;
+	}
+});
+
+/* detect clipboard change */
+
+setInterval(function() {
+	copypaste.paste(function(err, text) {
+		if( !err ) {
+		if( clipboard != text ) {
+			clipboard = text;
+			socket.emit('copy', text);
+		}
+		}
+	});
+}, 10);
+
 
 /* slave session variables */
 
@@ -63,6 +87,10 @@ socket.on('toggle', function(down, button) {
 socket.on('scroll', function(magnitude, direction) {
 	robot.scrollMouse(magnitude, direction);	
 });
+socket.on('copy', function(text) {
+	copypaste.copy(text);	
+});
+
 socket.emit('init', conf.hostname);
 
 /* translations of standard key ids to robotjs naming
