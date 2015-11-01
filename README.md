@@ -18,6 +18,12 @@ Basic requirement is *Node.js* and *npm*, if you don't have those programs start
 
 Library `input-event` does not figure in npm repository, thus it has to be installed manually. Simply download the zip package from [input-event repository](https://github.com/risacher/input-event) , unzip it to `node_modules` directory and rename it from `input-event-master` to `input-event`.
 
+## install xclip on each machine for clipboard synchronization
+
+on Debian based systems something like
+
+`sudo apt-get install xclip`
+
 # configuration
 
 Configuration is done in single *conf.json* file. Here we provide an example configuration for single desktop and two laptop computers.
@@ -115,8 +121,8 @@ Once server is started launch client applications on each of side screen compute
 # most important TODOs
 
 1. SSL encryption, for security reasons
-2. synchronize clipboard
-3. auto detect screen resolution for simpler configuration
+2. auto detect screen resolution for simpler configuration
+3. make it possible to use all keyboard keys
 
 # licence
 
