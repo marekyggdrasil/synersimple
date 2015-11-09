@@ -4,9 +4,9 @@ This project is an attempt to create simple equivalent of Synergy project that i
 
 # Security disclaimer
 
-```
-This software does not implement any kind of encryption (for now). Socket events can be easily sniffed in local network. This can be used to store your private and security sensitive data such as credit card number or passwords.
-```
+This software does not implement any kind of encryption (for now).
+Socket events can be easily sniffed in local network.
+This can be used to store your private and security sensitive data such as credit card number or passwords.
 
 # Wiki links
 
