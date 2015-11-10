@@ -11,6 +11,25 @@ var io = require('socket.io')(http);
 var inputevent = require('input-event');
 var xinput = require('xinput');
 var copypaste = require('copy-paste');
+var xrandr = require('xrandr-parse');
+var exec = require('child_process').exec;
+
+/* auto detect screen resolution */
+
+var resx;
+var rexy;
+
+exec('xrandr', function(err, stdout) {
+	var query = xrandr(stdout);
+	for(var key in query) {
+		if( query.hasOwnProperty( key ) ) {
+			if( query[ key ].connected ) {
+				resx = query[ key ].current.width;
+				resy = query[ key ].current.height;
+			}
+		}
+	}
+});
 
 /* pointer position variables */
 
@@ -150,7 +169,7 @@ setInterval(function() {
 					control = slave_left;
 				}
 			}
-			else if( last_pos.x == conf.resx - 1 ) {
+			else if( last_pos.x == resx - 1 ) {
 				/* switch to right screen if right machine
 				 * is connected */
 				if( slave_right != undefined ) {
@@ -228,4 +247,3 @@ io.on('connection', function(socket) {
 http.listen(conf.port, '0.0.0.0', function(){
 	console.log('. synersimple server listening on port :' + conf.port);
 });
-

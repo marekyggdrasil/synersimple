@@ -5,6 +5,26 @@ var robot = require('robotjs');
 var conf = require('./conf.json');
 var socket = require('socket.io-client')('http://'+conf.address+':'+conf.port);
 var copypaste = require('copy-paste');
+var xrandr = require('xrandr-parse');
+var exec = require('child_process').exec;
+
+/* auto detect screen resolution */
+
+var resx;
+var rexy;
+
+exec('xrandr', function(err, stdout) {
+	var query = xrandr(stdout);
+	for(var key in query) {
+		if( query.hasOwnProperty( key ) ) {
+			if( query[ key ].connected ) {
+				resx = query[ key ].current.width;
+				resy = query[ key ].current.height;
+			}
+		}
+	}
+});
+
 
 /* connect / disconnect events */
 
@@ -41,20 +61,14 @@ setInterval(function() {
 /* slave session variables */
 
 var slavepos = '';
-var resx = 0;
-var resy = 0;
 
 /* detect position */
 
 if( conf.network.left.hostname == conf.hostname ) {
 	slavepos = 'left';
-	resx = conf.network.left.resx;
-	resy = conf.network.left.resy;
 }
 else if( conf.network.right.hostname == conf.hostname ) {
 	slavepos = 'right';
-	resx = conf.network.right.resx;
-	resy = conf.network.right.resy;
 }
 
 /* mouse events */
